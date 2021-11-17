@@ -1,4 +1,3 @@
-using ConfigurationManagerDeadlock;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +15,11 @@ app.MapGet("/value", (MyOptions options) => Results.Json(options));
 app.MapPost("/reload", (IConfiguration config) => ((IConfigurationRoot)config).Reload());
 
 app.Run();
+
+public class MyOptions
+{
+    public string Value { get; set; } = "foo";
+}
 
 public class MyConfigurationSource : IConfigurationSource
 {
